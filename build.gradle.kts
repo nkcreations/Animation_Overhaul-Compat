@@ -3,6 +3,8 @@ import com.matthewprenger.cursegradle.CurseProject
 import com.matthewprenger.cursegradle.CurseRelation
 import com.matthewprenger.cursegradle.Options
 import gg.essential.gradle.util.noServerRunConfigs
+import org.gradle.api.JavaVersion
+import org.gradle.jvm.toolchain.JavaLanguageVersion
 
 plugins {
     alias(libs.plugins.kotlin)
@@ -35,6 +37,12 @@ blossom {
     replaceToken("@VER@", mod_version)
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
 version = mod_version
 group = "elocindev.animation_overhaul"
 
@@ -56,6 +64,8 @@ loom {
     }
 
     mixin.defaultRefmapName.set("${mod_id}.refmap.json")
+
+    java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
 repositories {
@@ -66,6 +76,8 @@ repositories {
     maven("https://oss.sonatype.org/content/repositories/snapshots")
     maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
     maven("https://api.modrinth.com/maven")
+    maven { url 'https://jitpack.io' }
+    jcenter()
 
     mavenCentral()
 }

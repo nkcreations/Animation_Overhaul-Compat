@@ -115,6 +115,12 @@ dependencies {
     //include("org.joml:joml:1.10.5")
 }
 
+configurations.all {
+    resolutionStrategy {
+        force 'net.jodah:typetools:0.6.3'
+    }
+}
+
 tasks.processResources {
     inputs.property("id", mod_id)
     inputs.property("name", mod_name)

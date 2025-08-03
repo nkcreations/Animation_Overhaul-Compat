@@ -1,25 +1,29 @@
 pluginManagement {
     repositories {
+        maven("https://repo.essential.gg/repository/maven-public")
         gradlePluginPortal()
         mavenCentral()
-        maven("https://maven.fabricmc.net")
-        maven("https://maven.architectury.dev/")
-        maven("https://maven.minecraftforge.net")
-        maven("https://repo.essential.gg/repository/maven-public")
     }
-    val egtVersion = "0.2.2"
-    plugins {
-        id("gg.essential.multi-version.root") version egtVersion
-    }
-    dependencyResolutionManagement {
-        versionCatalogs {
-            create("libs")
-            create("egt") {
-                plugin("multiversion", "gg.essential.multi-version").version(egtVersion)
-                plugin("multiversionRoot", "gg.essential.multi-version.root").version(egtVersion)
-                plugin("defaults", "gg.essential.defaults").version(egtVersion)
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        mavenCentral {
+            content {
+                includeGroup("net.jodah")
             }
         }
+        maven("https://maven.minecraftforge.net") {
+            content {
+                excludeGroup("net.jodah")
+            }
+        }
+        maven("https://maven.fabricmc.net")
+        maven("https://maven.parchmentmc.org")
+        maven("https://maven.quiltmc.org/repository/release")
+        maven("https://maven.architectury.dev/")
+        maven("https://repo.essential.gg/repository/maven-public")
     }
 }
 

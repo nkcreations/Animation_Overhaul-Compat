@@ -15,3 +15,14 @@ preprocess {
     forge12001.link(forge11902)
     forge11902.link(fabric11902)
 }
+
+allprojects {
+    configurations.all {
+        resolutionStrategy.eachDependency {
+            if (requested.group == "net.jodah" && requested.name == "typetools") {
+                useVersion("0.8.3")
+                because("Forge eventbus 6.0.x requires typetools 0.8+, some mirrors only list 0.6.x")
+            }
+        }
+    }
+}

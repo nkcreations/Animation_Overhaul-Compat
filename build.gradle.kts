@@ -7,7 +7,7 @@ import org.gradle.jvm.toolchain.JavaLanguageVersion
 
 plugins {
     id("gg.essential.multi-version")
-    kotlin("jvm")
+    id("org.jetbrains.kotlin.jvm")
     id("com.github.johnrengelman.shadow")
     id("net.kyori.blossom")
     id("com.modrinth.minotaur")

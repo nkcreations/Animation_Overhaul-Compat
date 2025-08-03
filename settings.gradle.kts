@@ -12,6 +12,7 @@ pluginManagement {
     plugins {
         id("gg.essential.multi-version.root") version "0.2.2"
         id("gg.essential.multi-version") version "0.2.2"
+        id("org.jetbrains.kotlin.jvm") version "1.9.24"
     }
 }
 

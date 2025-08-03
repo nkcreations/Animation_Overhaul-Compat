@@ -118,6 +118,7 @@ dependencies {
 configurations.all {
     resolutionStrategy {
         force("net.jodah:typetools:0.6.3")
+        force("net.minecraftforge:eventbus:6.0.5")
     }
 }
 

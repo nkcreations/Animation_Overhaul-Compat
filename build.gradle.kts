@@ -108,7 +108,7 @@ dependencies {
             include("maven.modrinth:playeranimator:${playeranimator_version_11902}-forge")
         }
 
-        modImplementation("maven.modrinth:spell-engine:${spellengine_version}+1.20.1-fabric")
+        implementation("maven.modrinth:spell-engine:${spellengine_version}+1.20.1-forge")
     }
 
     implementation("org.joml:joml:1.10.5")

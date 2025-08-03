@@ -37,11 +37,6 @@ blossom {
     replaceToken("@VER@", mod_version)
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
-    }
-}
 
 version = mod_version
 group = "elocindev.animation_overhaul"
@@ -115,12 +110,6 @@ dependencies {
     //include("org.joml:joml:1.10.5")
 }
 
-configurations.all {
-    resolutionStrategy {
-        force("net.jodah:typetools:0.6.3")
-        force("net.minecraftforge:eventbus:6.0.5")
-    }
-}
 
 tasks.processResources {
     inputs.property("id", mod_id)

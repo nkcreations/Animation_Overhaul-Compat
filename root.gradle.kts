@@ -1,3 +1,6 @@
+import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.jvm.toolchain.JavaLanguageVersion
+
 plugins {
     alias(libs.plugins.kotlin) apply false
     alias(libs.plugins.shadow) apply false
@@ -14,4 +17,15 @@ preprocess {
     fabric12001.link(forge12001)
     forge12001.link(forge11902)
     forge11902.link(fabric11902)
+}
+
+// Enforce Java 17 toolchain across the whole build
+allprojects {
+    pluginManager.withPlugin("java") {
+        extensions.configure<JavaPluginExtension> {
+            toolchain {
+                languageVersion.set(JavaLanguageVersion.of(17))
+            }
+        }
+    }
 }

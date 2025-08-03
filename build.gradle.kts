@@ -107,16 +107,18 @@ dependencies {
         } else {
             include("maven.modrinth:playeranimator:${playeranimator_version_11902}-forge")
         }
-    }
 
-    implementation("maven.modrinth:spell-engine:${spellengine_version}+1.20.1-fabric")
+        modImplementation("maven.modrinth:spell-engine:${spellengine_version}+1.20.1-fabric")
+    }
 
     implementation("org.joml:joml:1.10.5")
     //include("org.joml:joml:1.10.5")
 }
 
 configurations.all {
-    resolutionStrategy.force("net.jodah:typetools:0.6.3")
+    resolutionStrategy {
+        force("net.jodah:typetools:0.6.3")
+    }
 }
 
 tasks.processResources {

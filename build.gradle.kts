@@ -6,7 +6,8 @@ import gg.essential.gradle.util.noServerRunConfigs
 
 plugins {
     alias(libs.plugins.kotlin)
-    id("gg.essential.multi-version")
+    alias(egt.plugins.multiversion)
+    alias(egt.plugins.defaults)
     alias(libs.plugins.shadow)
     alias(libs.plugins.blossom)
     alias(libs.plugins.minotaur)
@@ -57,6 +58,11 @@ loom {
     mixin.defaultRefmapName.set("${mod_id}.refmap.json")
 }
 
+
+val shade: Configuration by configurations.creating {
+    configurations.implementation.get().extendsFrom(this)
+}
+
 dependencies {
     if (project.platform.isFabric) {
         modImplementation("maven.modrinth:necronomicon:${necronomicon_version}-fabric")
@@ -78,9 +84,9 @@ dependencies {
         } else {
             include("maven.modrinth:playeranimator:${playeranimator_version_11902}-forge")
         }
-    }
 
-    implementation("maven.modrinth:spell-engine:${spellengine_version}+1.20.1-fabric")
+        implementation("maven.modrinth:spell-engine:${spellengine_version}+1.20.1-fabric")
+    }
 
     implementation("org.joml:joml:1.10.5")
     //include("org.joml:joml:1.10.5")

@@ -3,15 +3,15 @@ import com.matthewprenger.cursegradle.CurseProject
 import com.matthewprenger.cursegradle.CurseRelation
 import com.matthewprenger.cursegradle.Options
 import gg.essential.gradle.util.noServerRunConfigs
+import org.gradle.jvm.toolchain.JavaLanguageVersion
 
 plugins {
-    alias(libs.plugins.kotlin)
-    alias(egt.plugins.multiversion)
-    alias(egt.plugins.defaults)
-    alias(libs.plugins.shadow)
-    alias(libs.plugins.blossom)
-    alias(libs.plugins.minotaur)
-    alias(libs.plugins.cursegradle)
+    id("gg.essential.multi-version")
+    kotlin("jvm")
+    id("com.github.johnrengelman.shadow")
+    id("net.kyori.blossom")
+    id("com.modrinth.minotaur")
+    id("com.matthewprenger.cursegradle")
 }
 
 val archiveBase: String by project
@@ -58,7 +58,6 @@ loom {
     mixin.defaultRefmapName.set("${mod_id}.refmap.json")
 }
 
-
 val shade: Configuration by configurations.creating {
     configurations.implementation.get().extendsFrom(this)
 }
@@ -66,8 +65,8 @@ val shade: Configuration by configurations.creating {
 dependencies {
     if (project.platform.isFabric) {
         modImplementation("maven.modrinth:necronomicon:${necronomicon_version}-fabric")
-        
         modImplementation("maven.modrinth:playeranimator:${playeranimator_version_12001}-fabric")
+        implementation("maven.modrinth:spell-engine:${spellengine_version}+1.20.1-fabric")
 
         if (project.platform.mcMinor == 20) {
             include("maven.modrinth:playeranimator:${playeranimator_version_12001}-fabric")
@@ -76,7 +75,6 @@ dependencies {
         }
     } else if (project.platform.isForge) {
         implementation("maven.modrinth:necronomicon:${necronomicon_version}-forge")
-
         implementation("maven.modrinth:playeranimator:${playeranimator_version_12001}-forge")
         
         if (project.platform.mcMinor == 20) {
@@ -84,12 +82,9 @@ dependencies {
         } else {
             include("maven.modrinth:playeranimator:${playeranimator_version_11902}-forge")
         }
-
-        implementation("maven.modrinth:spell-engine:${spellengine_version}+1.20.1-fabric")
     }
 
     implementation("org.joml:joml:1.10.5")
-    //include("org.joml:joml:1.10.5")
 }
 
 tasks.processResources {
@@ -153,8 +148,6 @@ tasks {
                 attributes(
                     mapOf(
                         "ModSide" to "CLIENT",
-                        // "TweakOrder" to "0",
-                        // "TweakClass" to "org.spongepowered.asm.launch.MixinTweaker",
                         "ForceLoadAsMod" to true
                     )
                 )

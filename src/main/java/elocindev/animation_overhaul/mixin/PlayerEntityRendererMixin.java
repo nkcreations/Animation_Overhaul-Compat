@@ -1,5 +1,7 @@
 package elocindev.animation_overhaul.mixin;
 
+import elocindev.animation_overhaul.compat.CompatibilityLoader;
+import elocindev.animation_overhaul.compat.EmotecraftCompat;
 import elocindev.animation_overhaul.compat.SpellEngineCompat;
 import elocindev.animation_overhaul.AnimationOverhaul;
 import elocindev.animation_overhaul.api.ILeanablePlayer;
@@ -50,6 +52,9 @@ public abstract class PlayerEntityRendererMixin
         }
         
         if (SpellEngineCompat.shouldNotLetAnimate(player)) return;
+        if (CompatibilityLoader.EMOTECRAFT) {
+            if (EmotecraftCompat.isEmotePlaying(player)) return;
+        }
 
         matrixStack.pushPose();
 

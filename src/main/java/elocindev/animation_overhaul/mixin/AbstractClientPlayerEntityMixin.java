@@ -14,7 +14,6 @@ import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
 import elocindev.animation_overhaul.AnimationOverhaul;
 import elocindev.animation_overhaul.api.ILeanablePlayer;
 import elocindev.animation_overhaul.compat.CompatibilityLoader;
-import elocindev.animation_overhaul.compat.EmotecraftCompat;
 import elocindev.animation_overhaul.config.AnimationsConfig;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -194,10 +193,6 @@ public abstract class AbstractClientPlayerEntityMixin extends Player implements 
     @Override
     public void tick() {
         super.tick();
-
-        if (CompatibilityLoader.EMOTECRAFT) {
-            if (EmotecraftCompat.isEmotePlaying((Player)(Object)this)) return;
-        }
 
         if (isPassenger() && !(getVehicle() instanceof Boat)) {
             return;

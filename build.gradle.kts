@@ -3,13 +3,10 @@ import com.matthewprenger.cursegradle.CurseProject
 import com.matthewprenger.cursegradle.CurseRelation
 import com.matthewprenger.cursegradle.Options
 import gg.essential.gradle.util.noServerRunConfigs
-import org.gradle.api.JavaVersion
-import org.gradle.jvm.toolchain.JavaLanguageVersion
 
 plugins {
     alias(libs.plugins.kotlin)
-    id(egt.plugins.multiversion.get().pluginId)
-    id(egt.plugins.defaults.get().pluginId)
+    id("gg.essential.multi-version")
     alias(libs.plugins.shadow)
     alias(libs.plugins.blossom)
     alias(libs.plugins.minotaur)
@@ -37,7 +34,6 @@ blossom {
     replaceToken("@VER@", mod_version)
 }
 
-
 version = mod_version
 group = "elocindev.animation_overhaul"
 
@@ -59,26 +55,6 @@ loom {
     }
 
     mixin.defaultRefmapName.set("${mod_id}.refmap.json")
-
-    java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
-}
-
-repositories {
-    maven("https://maven.terraformersmc.com/releases/")
-    maven("https://repo.essential.gg/repository/maven-public/")
-    maven("https://maven.dediamondpro.dev/releases")
-    maven("https://maven.isxander.dev/releases")
-    maven("https://oss.sonatype.org/content/repositories/snapshots")
-    maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
-    maven("https://api.modrinth.com/maven")
-    maven(url = "https://jitpack.io")
-    jcenter()
-
-    mavenCentral()
-}
-
-val shade: Configuration by configurations.creating {
-    configurations.implementation.get().extendsFrom(this)
 }
 
 dependencies {
@@ -102,14 +78,13 @@ dependencies {
         } else {
             include("maven.modrinth:playeranimator:${playeranimator_version_11902}-forge")
         }
-
-        implementation("maven.modrinth:spell-engine:${spellengine_version}+1.20.1-forge")
     }
+
+    implementation("maven.modrinth:spell-engine:${spellengine_version}+1.20.1-fabric")
 
     implementation("org.joml:joml:1.10.5")
     //include("org.joml:joml:1.10.5")
 }
-
 
 tasks.processResources {
     inputs.property("id", mod_id)

@@ -4,9 +4,11 @@ import com.matthewprenger.cursegradle.CurseRelation
 import com.matthewprenger.cursegradle.Options
 import gg.essential.gradle.util.noServerRunConfigs
 import org.gradle.jvm.toolchain.JavaLanguageVersion
+import org.gradle.api.plugins.JavaPluginExtension
 
 plugins {
     id("gg.essential.multi-version")
+    id("gg.essential.multi-version.root")
     id("org.jetbrains.kotlin.jvm")
     id("com.github.johnrengelman.shadow")
     id("net.kyori.blossom")
@@ -222,6 +224,14 @@ tasks {
     register("publish") {
         dependsOn(modrinth)
         dependsOn(curseforge)
+    }
+}
+
+allprojects {
+    pluginManager.withPlugin("java") {
+        extensions.configure<JavaPluginExtension> {
+            toolchain { languageVersion.set(JavaLanguageVersion.of(17)) }
+        }
     }
 }
 

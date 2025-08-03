@@ -76,7 +76,7 @@ repositories {
     maven("https://oss.sonatype.org/content/repositories/snapshots")
     maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
     maven("https://api.modrinth.com/maven")
-    maven { url 'https://jitpack.io' }
+    maven(url = "https://jitpack.io")
     jcenter()
 
     mavenCentral()
@@ -116,9 +116,7 @@ dependencies {
 }
 
 configurations.all {
-    resolutionStrategy {
-        force 'net.jodah:typetools:0.6.3'
-    }
+    resolutionStrategy.force("net.jodah:typetools:0.6.3")
 }
 
 tasks.processResources {

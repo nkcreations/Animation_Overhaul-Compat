@@ -1,32 +1,33 @@
+rootProject.name = "Animation Overhaul"
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        mavenCentral()
+        maven("https://repo.essential.gg/repository/maven-public")
         maven("https://maven.fabricmc.net")
         maven("https://maven.architectury.dev/")
         maven("https://maven.minecraftforge.net")
-        maven("https://repo.essential.gg/repository/maven-public")
+        mavenCentral()
     }
-    val egtVersion = "0.2.2"
     plugins {
-        id("gg.essential.multi-version.root") version egtVersion
-    }
-    dependencyResolutionManagement {
-        versionCatalogs {
-            create("libs")
-            create("egt") {
-                plugin("multiversion", "gg.essential.multi-version").version(egtVersion)
-                plugin("multiversionRoot", "gg.essential.multi-version.root").version(egtVersion)
-                plugin("defaults", "gg.essential.defaults").version(egtVersion)
-            }
-        }
+        id("gg.essential.multi-version.root") version "0.2.2"
+        id("gg.essential.multi-version") version "0.2.2"
+        id("org.jetbrains.kotlin.jvm") version "1.9.24"
+        id("com.github.johnrengelman.shadow") version "8.1.1"
     }
 }
 
-val mod_name: String by settings
-
-rootProject.name = mod_name
-rootProject.buildFileName = "root.gradle.kts"
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        maven("https://repo.essential.gg/repository/maven-public")
+        maven("https://maven.fabricmc.net")
+        maven("https://maven.architectury.dev/")
+        maven("https://maven.minecraftforge.net")
+        maven("https://api.modrinth.com/maven")
+        mavenCentral()
+    }
+}
 
 listOf(
     "1.20.1-fabric",
